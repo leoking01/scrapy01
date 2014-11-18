@@ -1,7 +1,15 @@
+#coding=utf-8
+#coding=gbk
+# -*- coding: cp936 -*- 
+
 from scrapy.spider import Spider
 from scrapy.selector import Selector
 
+
+#第一个DmozItem是模块名(文件名),第二个是类名
 #from tutorial.DmozItem  import DmozItem
+
+#这里items是模块名(文件名),DmozItem是类名
 from tutorial.items  import DmozItem
 
 
@@ -9,7 +17,7 @@ class DmozSpider(Spider):
     name = "dmoz"
     allowed_domains = ["dmoz.org"]
     start_urls = [
-        "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
+        #"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
         "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
         #"http://www.dmoz.org/"
     ]
@@ -31,10 +39,6 @@ class DmozSpider(Spider):
 			item['link'] = site.xpath('a/@href').extract()
 			item['desc'] = site.xpath('text()').extract()
 			items.append(item)
-
 		#return  0 
 		return  items
-
-
-
 
