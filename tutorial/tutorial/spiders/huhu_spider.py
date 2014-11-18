@@ -8,8 +8,8 @@ from scrapy.selector import Selector
 from tutorial.items import Website
 import sys
 import string
-sys.stdout=open('output.txt','w') #将打印信息输出在相应的位置下
-
+sys.stdout=open('output_huhu.txt','w') #将打印信息输出在相应的位置下
+print 'huhu--a'
 
 add = 0
 class DmozSpider(CrawlSpider):
@@ -21,6 +21,7 @@ class DmozSpider(CrawlSpider):
     ]
 
     
+	#print 'huhu--b'
     rules = (
         # 提取匹配 huhuuu/default.html\?page\=([\w]+) 的链接并跟进链接(没有callback意味着follow默认为True)
         Rule(SgmlLinkExtractor(allow=('huhuuu/default.html\?page\=([\w]+)', ),)),
@@ -31,6 +32,7 @@ class DmozSpider(CrawlSpider):
     )
 
     def parse_item(self, response):
+        print 'huhu--c'
         global add #用于统计博文的数量
         
         print  add
@@ -42,6 +44,14 @@ class DmozSpider(CrawlSpider):
         item = Website()
         item['headTitle'] = sel.xpath('/html/head/title/text()').extract()#观察网页对应得html源码
         item['url'] = response
-        print item
+        #print item  
+		## my mify following
+
+        for ii in item['headTitle']:
+            print ii.encode('utf-8')
+        for ii in item['url']:
+            print ii.encode('utf-8')
+
         items.append(item)
+        sys.stdout.close()#=open('output_huhu.txt','w') #将打印信息输出在相应的位置下
         return items

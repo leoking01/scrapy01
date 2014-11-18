@@ -1,1 +1,2 @@
-scrapy crawl dmoz -o items.json -t json
+scrapy crawl dmoz 
+#scrapy crawl dmoz -o items.json -t json

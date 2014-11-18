@@ -1,1 +1,3 @@
-	rm  *pyc  items.json   output.txt
+	rm  *pyc  items.json   
+	rm output_huhu.txt
+	rm output_cnds.txt
