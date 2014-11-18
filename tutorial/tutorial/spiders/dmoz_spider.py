@@ -2,24 +2,27 @@
 #coding=gbk
 # -*- coding: cp936 -*- 
 
+
 from scrapy.spider import Spider
 from scrapy.selector import Selector
 
 
-#第一个DmozItem是模块名(文件名),第二个是类名
+#第一个DmozItem是模块名(文件名,命名空间),第二个是类名
 #from tutorial.DmozItem  import DmozItem
 
-#这里items是模块名(文件名),DmozItem是类名
+#这里items是模块名(文件名，命名空间),DmozItem是类名
 from tutorial.items  import DmozItem
 
 
 class DmozSpider(Spider):
     name = "dmoz"
-    allowed_domains = ["dmoz.org"]
+    #allowed_domains = ["dmoz.org"]
+    allowed_domains = []
     start_urls = [
         #"http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
         "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
         #"http://www.dmoz.org/"
+		#"http://blog.csdn.net/blogdevteam"
     ]
 
     def parse(self, response):
@@ -27,6 +30,7 @@ class DmozSpider(Spider):
 #        open(filename, 'wb').write(response.body)
 		sel = Selector(response)
 		sites = sel.xpath('//ul[@class="directory-url"]/li')
+		#sites = sel.xpath('//ul/li')
 		items = []
 		for site in sites:
 			#title = site.xpath('a/text()').extract()
@@ -39,6 +43,13 @@ class DmozSpider(Spider):
 			item['link'] = site.xpath('a/@href').extract()
 			item['desc'] = site.xpath('text()').extract()
 			items.append(item)
+
+		#	for  j in item['title']:
+		#		print '标题:',j.encode('utf-8')
+		#	for  j in item['link']:
+		#		print '链接:',j.encode('utf-8')
+		#	for  j in item['desc']:
+		#		print '正文:',j.encode('utf-8')
 		#return  0 
 		return  items
 
