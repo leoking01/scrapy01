@@ -1,3 +1,3 @@
 clean:
 	-rm  *pyc
-	cd  ./spiders  &&   rm  ./spiders/*pyc
+	cd  ./spiders  &&   rm  *pyc
