@@ -16,6 +16,8 @@ from scrapy.selector import Selector
 import sys
 import string
 sys.stdout=open('output_cnds.txt','w') #将打印信息输出在相应的位置下
+print '-------------------output_cnds has opend.-----------------'
+
 
 class DmozSpider(Spider):
     name = "dmoz"
@@ -29,6 +31,8 @@ class DmozSpider(Spider):
     ]
 
     def parse(self, response):
+		print "---------cnds---start--------"
+        #sys.stdout=open('output_cnds.txt','w') #将打印信息输出在相应的位置下
 #        filename = response.url.split("/")[-2]
 #        open(filename, 'wb').write(response.body)
 		sel = Selector(response)
@@ -50,11 +54,12 @@ class DmozSpider(Spider):
 
 			for  j in item['title']:
 				print '标题:',j.encode('utf-8')
-			for  j in item['link']:
-				print '链接:',j.encode('utf-8')
-			for  j in item['desc']:
-				print '正文:',j.encode('utf-8')
-		sys.stdout.close()#=open('output_cnds.txt','w') #将打印信息输出在相应的位置下
+			#for  j in item['link']:
+			#	print '链接:',j.encode('utf-8')
+			#for  j in item['desc']:
+			#	print '正文:',j.encode('utf-8')
 		#return  0 
 		return  items
+		sys.stdout.close()#=open('output_cnds.txt','w') #将打印信息输出在相应的位置下
+		print "---------------output_cnds.txt------close--------."
 

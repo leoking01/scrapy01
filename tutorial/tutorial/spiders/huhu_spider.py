@@ -9,7 +9,7 @@ from tutorial.items import Website
 import sys
 import string
 sys.stdout=open('output_huhu.txt','w') #将打印信息输出在相应的位置下
-print 'huhu--a'
+print '----------output_huhu.txt  has been opend.-----------------'
 
 add = 0
 class DmozSpider(CrawlSpider):
@@ -32,7 +32,7 @@ class DmozSpider(CrawlSpider):
     )
 
     def parse_item(self, response):
-        print 'huhu--c'
+        print '----------------huhu--c---start-------'
         global add #用于统计博文的数量
         
         print  add
@@ -47,11 +47,20 @@ class DmozSpider(CrawlSpider):
         #print item  
 		## my mify following
 
+
+        print 'type(item)=',type(item)
+        print "type(item['url'])=",type(item['url'])
+        #print item['headTitle'].encode('utf-8')
         for ii in item['headTitle']:
             print ii.encode('utf-8')
-        for ii in item['url']:
-            print ii.encode('utf-8')
+
+        #    for jj in item['url']:
+         #       print jj.encode('utf-8')
 
         items.append(item)
-        sys.stdout.close()#=open('output_huhu.txt','w') #将打印信息输出在相应的位置下
         return items
+        sys.stdout.close()#=open('output_huhu.txt','w') #将打印信息输出在相应的位置下
+        print '---------------output_huhu.txt  close-------------'
+        
+        ####my add
+        quit()
